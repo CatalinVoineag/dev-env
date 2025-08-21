@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+sudo pacman -S --noconfirm --needed nautilus
+sudo pacman -S --noconfirm --needed git
+sudo pacman -S --noconfirm --needed fzf
+sudo pacman -S --noconfirm --needed yay
+sudo pacman -S --noconfirm --needed piper
+sudo pacman -S --noconfirm --needed pavucontrol
+sudo pacman -S --noconfirm --needed vlc
+sudo pacman -S --noconfirm --needed jq
+sudo pacman -S --noconfirm --needed xclip
+sudo pacman -S --noconfirm --needed less
+sudo pacman -S --noconfirm --needed ttf-jetbrains-mono-nerd ttf-font-awesome otf-font-awesome

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+filter=""
+
+while [[ $# > 0 ]]; do # count of arguments > 0
+  if [[ $1 == "-dry" ]]; then # first argument == dry
+    dry="1"
+  else
+    filter="$1" # set the first argument to filter
+  fi
+  shift # remove the first argument from args 
+done
+
+log() {
+  if [[ $dry == "1" ]]; then
+    echo "[DRY RUN]: $@" #$@ is everything, print everything
+  else
+    echo "$@"
+  fi
+}
+
+execute() {
+  log "execute $@"
+  if [[ $dry == "1" ]]; then
+    return
+  fi
+
+  "$@"
+}
+
+log "$script_dir -- $filter"
+
+cd $script_dir
+scripts=$(find ./runs -maxdepth 1 -mindepth 1 -executable -type f)
+
+for script in $scripts; do
+  # Does this script not contain this filter; v inverse matching; q is quiet, not print anything
+  if echo "$script" | grep -qv "$filter"; then
+    log "filtering $script"
+    continue
+  fi
+
+  execute ./$script
+done

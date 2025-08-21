@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+session=$(find ~ ~/work ~/work/itt-mentor-services ~/work/apply-for-teacher-training ~/work/publish-teachet-training ~/.config -mindepth 1 -maxdepth 2 -type d | fzf)
+session_name=$(basename "$session" | tr ":,. " "____")
+
+switch_to() {
+  tmux_running=$(pgrep tmux)
+
+  if [[ -z $TMUX ]]; then
+    tmux attach-session -t $session_name
+  else
+    tmux switch-client -t $session_name
+  fi
+}
+
+tmux_setup() {
+  tmux new-window -t "$session_name:2" -c "$session" \; \
+    new-window -t "$session_name:3" -c "$session" \; \
+    send-keys -t "$session_name:1" "nvim ." Enter \; \
+    send-keys -t "$session_name:2" "rails c" Enter \; \
+    send-keys -t "$session_name:3" "bin/setup" Enter \; \
+    select-window -t "$session_name:1"
+}
+
+if tmux has-session -t="$session_name" 2> /dev/null; then
+  switch_to
+else
+  tmux new-session -ds $session_name -c $session
+  switch_to
+
+  ## This doesn't work unless tmux is started
+  has_gemfile=$(find $session -mindepth 0 -maxdepth 1 -type f -name "Gemfile")
+  if [[ -n "$has_gemfile" ]]; then
+    tmux_setup
+  fi
+fi
+

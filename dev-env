@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+script_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+dry="0"
+
+while [[ $# > 0 ]]; do # count of arguments > 0
+  if [[ $1 == "-dry" ]]; then # first argument == dry
+    dry="1"
+  fi
+  shift # remove the first argument from args 
+done
+
+log() {
+  if [[ $dry == "1" ]]; then
+    echo "[DRY RUN]: $@" #$@ is everything, print everything
+  else
+    echo "$@"
+  fi
+}
+
+execute() {
+  log "execute $@"
+  if [[ $dry == "1" ]]; then
+    return
+  fi
+
+  "$@"
+}
+
+log "------ dev-env -------"
+
+copy_dir() {
+	from=$1
+	to=$2
+
+	pushd $from > /dev/null # push directory on location stack
+	# I'm in the the $from directory
+	dirs=$(find . -mindepth 1 -maxdepth 1 -type d)
+
+	for dir in $dirs; do
+		execute rm -rf $to/$dir # remove $to directory	
+		execute cp -r $dir $to/$dir # copy $from directory to $to
+	done
+	popd > /dev/null
+}
+
+copy_file() {
+	from=$1 # file
+	to=$2 # directory
+	name=$(basename $from) # name of script(file) to copy 
+
+	execute rm $to/$name # remove $to script name	
+	execute cp $from $to/$from # copy $from script name to $to
+}
+
+copy_dir .config $XDG_CONFIG_HOME
+copy_file .bashrc $HOME
+copy_file .gitconfig $HOME
+#copy_file hyprland.conf $XDG_CONFIG_HOME/hypr
