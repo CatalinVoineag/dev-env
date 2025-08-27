@@ -56,4 +56,6 @@ copy_file() {
 copy_dir .config $XDG_CONFIG_HOME
 copy_file .bashrc $HOME
 copy_file .gitconfig $HOME
-#copy_file hyprland.conf $XDG_CONFIG_HOME/hypr
+copy_file .tool-versions $HOME
+
+hyprctl reload

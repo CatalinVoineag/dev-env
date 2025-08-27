@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+yay -S asdf-vm --noconfirm --needed
+asdf plugin add ruby 
+asdf plugin add nodejs
+asdf plugin add kubelogin
+asdf plugin add kubetail
+asdf plugin add kubectl
+asdf plugin add azure-cli
+asdf plugin add yarn
+
+asdf install ruby 
+asdf install nodejs
+asdf install kubelogin
+asdf install kubetail
+asdf install kubectl
+asdf install azure-cli
+asdf install yarn
+
+gem install rails
+gem install byebug
+gem install ruby-lsp
+
+# Setup postgres
+sudo pacman --noconfirm --needed -S postgresql
+
+if ! systemctl is-active --quiet postgresql; then
+    echo "PostgreSQL is not running. Initializing database..."
+
+    if [ ! -d "/var/lib/postgres/data/base" ]; then
+        sudo su -l postgres -c "initdb --locale=C.UTF-8 --encoding=UTF8 -D '/var/lib/postgres/data'"
+    else
+        echo "Data directory already exists. Skipping initdb."
+    fi
+
+    sudo systemctl start postgresql
+    sudo systemctl enable postgresql
+else
+    echo "PostgreSQL is already running."
+fi
+
+USER="catalin"
+sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='$USER'" | grep -q 1 || {
+    echo "Creating PostgreSQL user: $USER"
+    sudo -u postgres createuser --interactive --pwprompt "$USER"
+}
+
+echo "PostgreSQL user $USER created (if not already exists)."
+
+if [ -d "$HOME/work" ]; then
+  echo "work directory exists"
+else
+  mkdir $HOME/work
+fi
+
+if [ -d "$HOME/play" ]; then
+  echo "play directory exists"
+else
+  mkdir $HOME/play
+fi

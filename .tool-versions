@@ -1,0 +1,7 @@
+ruby 3.4.5
+nodejs 20.9.0
+kubelogin 0.1.0
+kubetail 1.6.20
+kubectl 1.29.1
+azure-cli 2.56.0
+yarn 1.22.1

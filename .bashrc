@@ -25,10 +25,11 @@ bind -x '"\C-f": $HOME/dev-env/tmux-sessioniser'
 
 # Fzf bindings and completion
 source /usr/share/fzf/key-bindings.bash
-#FIX THIS
-#FIX THIS
-#FIX THIS
-#FIX THIS
-#FIX THIS
 
 export EDITOR=nvim
+
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# Go paths
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
