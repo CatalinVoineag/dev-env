@@ -33,3 +33,6 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 # Go paths
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
+
+# Ruby
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

@@ -9,13 +9,16 @@ sudo pacman -S --noconfirm --needed pavucontrol
 sudo pacman -S --noconfirm --needed vlc ffmpeg gst-libav gst-plugins-good gst-plugins-bad gst-plugins-ugly
 sudo pacman -S --noconfirm --needed vlc-plugins-all
 sudo pacman -S --noconfirm --needed jq
-sudo pacman -S --noconfirm --needed xclip
+sudo pacman -S --noconfirm --needed wl-clipboard
 sudo pacman -S --noconfirm --needed less
 sudo pacman -S --noconfirm --needed ttf-jetbrains-mono-nerd ttf-font-awesome otf-font-awesome
 sudo pacman -S --noconfirm --needed base-devel libffi zlib openssl readline curl
 sudo pacman -S --noconfirm --needed yaml libyaml
 sudo pacman -S --noconfirm --needed obsidian
 sudo pacman -S --noconfirm --needed discord
+sudo pacman -S --noconfirm --needed base-devel openssl zlib binutils libssl zlib-devel libxml2 libxslt
+sudo pacman -S --noconfirm --needed tar gzip diffutils 
+
 yay -S --noconfirm --needed slack-desktop
 
 go install github.com/CatalinVoineag/fundal@latest

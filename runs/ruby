@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 yay -S asdf-vm --noconfirm --needed
-asdf plugin add ruby 
 asdf plugin add nodejs
 asdf plugin add kubelogin
 asdf plugin add kubetail
@@ -9,13 +8,19 @@ asdf plugin add kubectl
 asdf plugin add azure-cli
 asdf plugin add yarn
 
-asdf install ruby 
 asdf install nodejs
 asdf install kubelogin
 asdf install kubetail
 asdf install kubectl
 asdf install azure-cli
 asdf install yarn
+
+curl -L get.rvm.io > rvm-install
+bash < ./rvm-install
+source ~/.bash_profile
+rm /home/catalin/dev-env/rvm-install
+
+rvm install ruby 3.4.4
 
 gem install rails
 gem install byebug
