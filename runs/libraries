@@ -3,7 +3,6 @@
 sudo pacman -S --noconfirm --needed nautilus
 sudo pacman -S --noconfirm --needed git
 sudo pacman -S --noconfirm --needed fzf
-sudo pacman -S --noconfirm --needed yay
 sudo pacman -S --noconfirm --needed piper
 sudo pacman -S --noconfirm --needed pavucontrol
 sudo pacman -S --noconfirm --needed vlc ffmpeg gst-libav gst-plugins-good gst-plugins-bad gst-plugins-ugly
@@ -18,8 +17,11 @@ sudo pacman -S --noconfirm --needed obsidian
 sudo pacman -S --noconfirm --needed discord
 sudo pacman -S --noconfirm --needed base-devel openssl zlib binutils libssl zlib-devel libxml2 libxslt
 sudo pacman -S --noconfirm --needed tar gzip diffutils 
+sudo pacman -S --noconfirm --needed ghostty
 
-yay -S --noconfirm --needed slack-desktop
+git clone https://aur.archlinux.org/yay-bin.git $HOME/yay-bin && cd $HOME/yay-bin && makepkg -si 
+
+yay -S --noconfirm --needed slack-desktop signal-desktop
 
 go install github.com/CatalinVoineag/fundal@latest
 

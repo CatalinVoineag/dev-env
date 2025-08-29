@@ -53,9 +53,10 @@ copy_file() {
 	execute cp $from $to/$from # copy $from script name to $to
 }
 
-copy_dir .config $XDG_CONFIG_HOME
+copy_dir .config $HOME/.config
 copy_file .bashrc $HOME
 copy_file .gitconfig $HOME
 copy_file .tool-versions $HOME
 
 hyprctl reload
+source ~/.bashrc

@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
 
-sudo pacman -S --noconfirm --needed flameshot
+sudo pacman -S --noconfirm --needed flameshot grim
 sudo pacman -S --noconfirm --needed kooha gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav pipewire pipewire-pulse
+
+
+if [ -d "$HOME/.config/flameshot" ]; then
+  echo "flameshot directory exists"
+else
+  sudo mkdir $HOME/.config/flameshot/
+fi

@@ -63,3 +63,7 @@ if [ -d "$HOME/play" ]; then
 else
   mkdir $HOME/play
 fi
+
+sudo pacman -S --noconfirm --needed redis
+sudo systemctl start redis
+sudo systemctl enable redis
