@@ -9,3 +9,7 @@ if [ -d "/mnt/NFS" ]; then
 else
   sudo mkdir -p /mnt/NFS
 fi
+
+if ! grep -q "pi.local:/export/Home /mnt/NFS" /etc/fstab; then
+  echo "pi.local:/export/Home /mnt/NFS nfs defaults,noauto,users 0 0" | sudo tee -a /etc/fstab
+fi
