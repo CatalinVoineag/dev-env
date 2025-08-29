@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+
+sudo pacman -S --noconfirm --needed networkmanager
+
+sudo systemctl enable NetworkManager.service
+sudo systemctl start NetworkManager.service

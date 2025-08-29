@@ -11,6 +11,7 @@
     "network",
     "cpu",
     "memory",
+    "disk"
   ],
 
   "hyprland/workspaces": {
@@ -62,5 +63,11 @@
     "interval": 1800,
     "exec": "$(pwd)/scripts/weather-stats/weather-stats",
     "return-type": "json"
+  },
+
+  "disk": {
+    "interval": 30,
+    "format": "{free}",
+    "unit": "GB"
   }
 }

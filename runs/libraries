@@ -19,7 +19,11 @@ sudo pacman -S --noconfirm --needed base-devel openssl zlib binutils libssl zlib
 sudo pacman -S --noconfirm --needed tar gzip diffutils 
 sudo pacman -S --noconfirm --needed ghostty
 
-git clone https://aur.archlinux.org/yay-bin.git $HOME/yay-bin && cd $HOME/yay-bin && makepkg -si 
+if command -v yay &> /dev/null; then
+  echo "yay installed"
+else
+  git clone https://aur.archlinux.org/yay-bin.git $HOME/yay-bin && cd $HOME/yay-bin && makepkg -si 
+fi
 
 yay -S --noconfirm --needed slack-desktop signal-desktop
 
