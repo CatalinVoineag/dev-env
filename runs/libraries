@@ -16,8 +16,9 @@ sudo pacman -S --noconfirm --needed yaml libyaml
 sudo pacman -S --noconfirm --needed obsidian
 sudo pacman -S --noconfirm --needed discord
 sudo pacman -S --noconfirm --needed base-devel openssl zlib binutils libssl zlib-devel libxml2 libxslt
-sudo pacman -S --noconfirm --needed tar gzip diffutils 
-sudo pacman -S --noconfirm --needed ghostty
+sudo pacman -S --noconfirm --needed tar gzip diffutils qbittorrent
+sudo pacman -S --noconfirm --needed ghostty brightnessctl
+sudo pacman -S --noconfirm --needed ghostty graphviz
 
 if command -v yay &> /dev/null; then
   echo "yay installed"

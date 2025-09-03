@@ -36,3 +36,9 @@ export PATH="$GOPATH/bin:$PATH"
 
 # Ruby
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# Postgresql book
+#export RIDESHARE_DB_PASSWORD=$(openssl rand -hex 12)
+#export DB_URL='postgres://postgres:@localhost:5432/postgres'
+#export DATABASE_URL='postgres://owner:@localhost:5432/rideshare_development'
+
