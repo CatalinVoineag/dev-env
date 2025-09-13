@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-selected=`cat ~/.config/dotfiles/tmux-cht-languages ~/.config/dotfiles/tmux-cht-tools | fzf`
+selected=`cat $HOME/dev-env/tmux-cht-languages $HOME/dev-env/tmux-cht-tools | fzf`
 
 if [[ -z $selected ]]; then
     exit 0

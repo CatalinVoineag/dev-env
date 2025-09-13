@@ -17,8 +17,9 @@ alias befs="bundle exec foreman start"
 alias bep="bundle exec puma -e development -C config/puma.rb"
 alias beu="bundle exec unicorn -c config/unicorn.rb -E development"
 
-alias run_monitor='xrandr --output HDMI-A-0 --mode 2560x1440 && xrandr --output eDP --off'
-alias run_laptop='xrandr --output eDP --auto'
+alias laptop_off="hyprctl keyword monitor 'eDP-1, disable'"
+alias laptop_on="hyprctl keyword monitor 'eDP-1, preferred, auto, 1'"
+
 
 # run tmux sessioniser
 bind -x '"\C-f": $HOME/dev-env/tmux-sessioniser'
