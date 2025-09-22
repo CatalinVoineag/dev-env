@@ -20,6 +20,9 @@ alias beu="bundle exec unicorn -c config/unicorn.rb -E development"
 alias laptop_off="hyprctl keyword monitor 'eDP-1, disable'"
 alias laptop_on="hyprctl keyword monitor 'eDP-1, preferred, auto, 1'"
 
+alias monitor_full="hyprctl keyword monitor 'DP-2, 3440x1440@165, auto, 1'"
+alias monitor_small="hyprctl keyword monitor 'DP-2, 2560x1440@144, auto, 1'"
+
 
 # run tmux sessioniser
 bind -x '"\C-f": $HOME/dev-env/tmux-sessioniser'

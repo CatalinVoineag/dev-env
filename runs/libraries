@@ -18,7 +18,8 @@ sudo pacman -S --noconfirm --needed discord
 sudo pacman -S --noconfirm --needed base-devel openssl zlib binutils libssl zlib-devel libxml2 libxslt
 sudo pacman -S --noconfirm --needed tar gzip diffutils qbittorrent
 sudo pacman -S --noconfirm --needed ghostty brightnessctl
-sudo pacman -S --noconfirm --needed ghostty graphviz
+sudo pacman -S --noconfirm --needed ghostty graphviz wimlib gnome-disk-utility
+sudo pacman -S --noconfirm --needed steam
 
 if command -v yay &> /dev/null; then
   echo "yay installed"
@@ -27,6 +28,7 @@ else
 fi
 
 yay -S --noconfirm --needed slack-desktop signal-desktop
+yay -S --noconfirm --needed heroic-games-launcher-bin woeusb
 
 go install github.com/CatalinVoineag/fundal@latest
 
