@@ -32,14 +32,22 @@ source /usr/share/fzf/key-bindings.bash
 
 export EDITOR=nvim
 
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
-# Go paths
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
-
-# Ruby
+# Ruby — source RVM first so its gem bin dirs are in PATH
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# Switch to default ruby (tmux/stale env may have old ruby first in inherited PATH)
+rvm use default 2>/dev/null
+# RVM's gem dir must be first; external tools may have polluted PATH before bashrc ran
+PATH="$GEM_HOME/bin:$MY_RUBY_HOME/bin:$PATH"
+
+# ASDF (after RVM, before /usr/bin)
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+. "$HOME/.asdf/asdf.sh"
+
+# Go paths (append)
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+
+export PATH="./node_modules/.bin:$PATH"
 
 # Postgresql book
 #export RIDESHARE_DB_PASSWORD=$(openssl rand -hex 12)

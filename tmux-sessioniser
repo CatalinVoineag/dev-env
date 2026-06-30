@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-session=$(find ~ ~/work ~/work/itt-mentor-services ~/work/apply-for-teacher-training ~/work/publish-teachet-training ~/.config -mindepth 1 -maxdepth 2 -type d | fzf)
+session=$(find ~ ~/work ~/work/itt-mentor-services ~/work/apply-for-teacher-training ~/work/get-into-teaching-interface-api ~/work/publish-teachet-training ~/.config -mindepth 1 -maxdepth 2 -type d | fzf)
 session_name=$(basename "$session" | tr ":,. " "____")
 
 switch_to() {

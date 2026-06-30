@@ -145,6 +145,22 @@ git_worktree.on_tree_change(function(op, metadata)
       end
     end
 
+    if file_exists('.env.local') == false then
+      if file_exists('../../main/.env.local') == true then
+        job:new({
+          command = 'cp',
+          args = { '../../main/.env.local', '.env.local' }
+        }):start()
+      end
+
+      if file_exists('../main/.env.local') == true then
+        job:new({
+          command = 'cp',
+          args = { '../main/.env.local', '.env.local' }
+        }):start()
+      end
+    end
+
     if file_exists('../main/Caddyfile') == true then
       job:new({
         command = 'cp',
