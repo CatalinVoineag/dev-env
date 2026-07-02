@@ -11,9 +11,10 @@ require('telescope').setup {
       width = 0.99,
       height = 0.99,
       horizontal = {
-        preview_width = 0.65
+        preview_width = 0.65,
       },
     },
+    wrap_results = true,
   },
 }
 
@@ -46,7 +47,7 @@ local function in_apply()
   end
 end
 
-telescope.load_extension = git_worktree
+-- telescope.load_extension("git_worktree")
 
 local function in_obsidian_vault()
   if tostring(vim.fn.expand("%:p:h:t")) == 'knowledge_grave' then
@@ -67,6 +68,12 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+vim.api.nvim_create_autocmd("User", {
+  pattern = "TelescopePreviewerLoaded",
+  callback = function(args)
+      vim.wo.wrap = true
+  end,
+})
 
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
@@ -83,45 +90,8 @@ vim.keymap.set("n", "<leader>gw", telescope.extensions.git_worktree.git_worktree
 -- <c-f> - toggles forcing of the next deletion
 vim.keymap.set("n", "<leader>gm", telescope.extensions.git_worktree.create_git_worktree, {})
 
---git_worktree.on_tree_change(function(op, metadata)
---  if op == git_worktree.Operations.Switch then
---    --jpause("debug time!")
---    --print("create BRANCH")
---    --file.copy(src, dest)
---  end
---end)
-
-
--- op = Operations.Switch, Operations.Create, Operations.Delete
--- metadata = table of useful values (structure dependent on op)
---      Switch
---          path = path you switched to
---          prev_path = previous worktree path
---      Create
---          path = path where worktree created
---          branch = branch name
---          upstream = upstream remote name
---      Delete
---          path = path where worktree deleted
-
 git_worktree.on_tree_change(function(op, metadata)
-  --print('op', git_worktree.Operations.Create)
-
   if op == git_worktree.Operations.Switch then
-  --if op == git_worktree.Operations.Create then
-
---    print('bin/setup')
---    job:new({
---      command = 'bin/setup'
---    }):start()
-
----- Check if the .env files is 2 directories back as well
---    print('copying .env')
---    job:new({
---      command = 'cp',
---      args = { '../../main/.env', '.env' }
---    }):start()
---
     if in_apply() then
       if directory_exists("tmp/pids") == false then
         os.execute("mkdir tmp/pids")
@@ -129,34 +99,22 @@ git_worktree.on_tree_change(function(op, metadata)
       os.execute("chmod +x bin/dev")
     end
 
-    if file_exists('.env') == false then
-      if file_exists('../../main/.env') == true then
+    local files = {'.env', '.env.local'}
+    for _, env_file in ipairs(files) do
+      local nested_path = '../../main/' .. env_file
+
+      if file_exists(nested_path) then
         job:new({
           command = 'cp',
-          args = { '../../main/.env', '.env' }
+          args = { nested_path, env_file }
         }):start()
       end
 
-      if file_exists('../main/.env') == true then
+      local path = '../main/' .. env_file
+      if file_exists(path) then
         job:new({
           command = 'cp',
-          args = { '../main/.env', '.env' }
-        }):start()
-      end
-    end
-
-    if file_exists('.env.local') == false then
-      if file_exists('../../main/.env.local') == true then
-        job:new({
-          command = 'cp',
-          args = { '../../main/.env.local', '.env.local' }
-        }):start()
-      end
-
-      if file_exists('../main/.env.local') == true then
-        job:new({
-          command = 'cp',
-          args = { '../main/.env.local', '.env.local' }
+          args = { path, env_file }
         }):start()
       end
     end
@@ -183,4 +141,3 @@ git_worktree.on_tree_change(function(op, metadata)
     end
   end
 end)
-

@@ -19,7 +19,8 @@ sudo pacman -S --noconfirm --needed base-devel openssl zlib binutils libssl zlib
 sudo pacman -S --noconfirm --needed tar gzip diffutils qbittorrent
 sudo pacman -S --noconfirm --needed ghostty brightnessctl
 sudo pacman -S --noconfirm --needed ghostty graphviz wimlib gnome-disk-utility
-sudo pacman -S --noconfirm --needed steam
+sudo pacman -S --noconfirm --needed steam jre17-openjdk cmake
+sudo pacman -S --noconfirm --needed cmake
 
 if command -v yay &> /dev/null; then
   echo "yay installed"
