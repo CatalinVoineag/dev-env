@@ -26,7 +26,7 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
   -- Replace the language servers listed here 
   -- with the ones you want to install
-  ensure_installed = {'gopls', 'htmx', 'pyright', 'lua_ls', 'bashls'},
+  ensure_installed = {'gopls', 'htmx', 'pyright', 'lua_ls', 'bashls', 'clangd'},
 
   handlers = {
     function(server_name)
@@ -92,7 +92,7 @@ local function add_ruby_code_lens_command(client, bufnr)
 
     for _, lens in ipairs(lenses) do
       if lens.command and lens.command.command == "rubyLsp.openFile" and lens.range.start.line <= line and line <= lens.range['end'].line then
-        fname = vim.uri_to_fname(tostring(lens.command.arguments[1][1]))
+        local fname = vim.uri_to_fname(tostring(lens.command.arguments[1][1]))
         vim.cmd.edit(fname)
       else
         print 'No file found'

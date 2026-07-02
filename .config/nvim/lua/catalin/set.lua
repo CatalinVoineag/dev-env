@@ -8,7 +8,7 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
-vim.smartindent = true
+vim.opt.smartindent = true
 vim.opt.wrap = true
 
 vim.opt.swapfile = false
@@ -48,9 +48,8 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
-vim.nocompatible = true
-vim.filetype.plugin = true
-vim.syntax = true
+vim.cmd("filetype plugin on")
+vim.cmd("syntax on")
 
 vim.opt.autoread = true--"Reload files changed outside vim
 

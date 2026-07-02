@@ -2,7 +2,6 @@ local git_worktree = require "git-worktree"
 local builtin = require('telescope.builtin')
 local telescope = require('telescope')
 local job = require('plenary.job')
-local lfs = require("lfs")
 
 require('telescope').setup {
   defaults = {
@@ -29,12 +28,7 @@ local function file_exists(filename)
 end
 
 local function directory_exists(path)
-  local dir = lfs.attributes(path, "mode") == "directory"
-  if dir then
-    return true
-  else
-    return false
-  end
+  return vim.fn.isdirectory(path) == 1
 end
 
 local function in_apply()
@@ -47,7 +41,7 @@ local function in_apply()
   end
 end
 
--- telescope.load_extension("git_worktree")
+telescope.load_extension("git_worktree")
 
 local function in_obsidian_vault()
   if tostring(vim.fn.expand("%:p:h:t")) == 'knowledge_grave' then

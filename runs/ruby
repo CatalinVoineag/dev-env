@@ -18,7 +18,8 @@ asdf install yarn
 curl -L get.rvm.io > rvm-install
 bash < ./rvm-install
 source ~/.bash_profile
-rm /home/catalin/dev-env/rvm-install
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+rm "$script_dir/../rvm-install"
 
 rvm install ruby 3.4.4
 

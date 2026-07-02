@@ -29,8 +29,9 @@ local function file_exists(filename)
 end
 
 function Go_to_definition()
-    vim.lsp.buf.definition()
-    Go_to_association()
+    if not Go_to_association() then
+        vim.lsp.buf.definition()
+    end
 end
 
 function Go_to_association()
@@ -66,13 +67,17 @@ function Go_to_association()
 
       if file_exists(path) == true then
         vim.cmd.edit(path)
+        return true
       else
         path = string.format("app/models/%s.rb", associated_record)
 
         if file_exists(path) == true then
           vim.cmd.edit(path)
+          return true
         end
       end
     end
+
+    return false
 end
 

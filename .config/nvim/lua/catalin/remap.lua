@@ -25,7 +25,6 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- yank to system clipboard
-vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>y", "\"+Y")
 
@@ -35,7 +34,7 @@ vim.keymap.set("n", "<leader>k", ":wincmd k<CR>")
 vim.keymap.set("n", "<leader>l", ":wincmd l<CR>")
 
 -- Reload nvim config
-vim.keymap.set("n", "<leader><CR>", ":so /home/catalin/.config/dotfiles/nvim/init.lua<CR>")
+vim.keymap.set("n", "<leader><CR>", ":so $MYVIMRC<CR>")
 
 -- Collapse text
 vim.keymap.set("n", "<end>", "za")
@@ -46,7 +45,7 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 vim.keymap.set("n", "<leader>e", ":!chmod +x %")
 
 -- tmux sessioniser
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww /home/catalin/.config/dotfiles/tmux-sessioniser<CR>")
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww " .. os.getenv("HOME") .. "/.config/tmux/tmux-sessioniser<CR>")
 
 -- Go to notes
 function GoToNotes()
@@ -99,8 +98,7 @@ local function review_quick_fix()
   Review = true
   BeforeReviewPath = (vim.fn.expand("%") ~= "" and vim.fn.expand("%")) or vim.fn.getcwd()
 
-  --local main_hash = vim.cmd(":G log --merges -1 --format='%H'")
-  local main_hash = vim.fn.systemlist("git log --merges -1 --format=\\%H")[1]
+  local main_hash = vim.fn.systemlist("git log --merges -1 --format=%H")[1]
 
   vim.cmd(":G difftool " ..main_hash.. " HEAD")
   vim.cmd("silent! :Gvdiffsplit " ..main_hash)
@@ -117,7 +115,7 @@ local function quickfix_next()
   vim.cmd("silent! :cnext")
 
   if Review == true then
-    local main_hash = vim.fn.systemlist("git log --merges -1 --format=\\%H")[1]
+    local main_hash = vim.fn.systemlist("git log --merges -1 --format=%H")[1]
     vim.cmd("silent! :Gvdiffsplit " ..main_hash)
 
     set_buffs()
@@ -134,7 +132,7 @@ local function quickfix_prev()
   vim.cmd("silent! :cprev")
 
   if Review == true then
-    local main_hash = vim.fn.systemlist("git log --merges -1 --format=\\%H")[1]
+    local main_hash = vim.fn.systemlist("git log --merges -1 --format=%H")[1]
     vim.cmd("silent! :Gvdiffsplit " ..main_hash)
 
     set_buffs()

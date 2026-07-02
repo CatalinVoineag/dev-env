@@ -1,7 +1,7 @@
-theme = rose-pine
+theme = Rose Pine
 
 background-opacity = 0.8
-background = 000000
+background = #000000
 
 font-size = 20
 
@@ -10,5 +10,7 @@ shell-integration-features = no-cursor,no-sudo,title
 window-decoration = false
 gtk-custom-css = ./custom.css
 quick-terminal-animation-duration = 0
+
+confirm-close-surface = false
 
 keybind = ctrl+enter=unbind
